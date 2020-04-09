@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/SEWAAPASAJALOGO"
+    android:background="@drawable/sewapaja"
     tools:context=".LoginActivity">
 
         <Button
@@ -24,7 +24,7 @@
             android:textColorHint="@color/white" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/et_layoutusername"
             android:layout_width="285dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
@@ -40,7 +40,7 @@
             android:hint="Username" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/et_layoutpassword"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:background="@drawable/roundwhite"
@@ -54,8 +54,15 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Password" />
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/loading"
+                android:layout_below="@+id/et_layoutpassword"
+                android:visibility="gone"
+                />
 
-        <Button
+        <TextView
             android:id="@+id/CreateAccountButton"
             android:textColor="@color/white"
             android:textColorHint="@color/white"

@@ -1,169 +1,119 @@
 package com.example.login;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.Typeface;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-public class LoginActivity extends AppCompatActivity  implements InitComponent, View.OnClickListener{
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-    //declare componenr
-    private MyEditText et_username;
-    private MyEditText et_password;
-    private MyTextView btn_login;
-    private MyTextView txt_register;
-    private TextView logofont;
-    private CoordinatorLayout coordinatorlayout;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    //declare context
-    private Context mContext;
+import java.util.HashMap;
+import java.util.Map;
 
-    //declate variable
-    private DataUser userData;
+public class LoginActivity extends AppCompatActivity {
 
-    //declare sweet alert
-    //   private SweetAlertDialog pDialog;
-    private ProgressDialog pDialog;
+    private EditText username, password;
+    private Button btn_login, btn_register;
+    private ProgressBar loading;
+    private static String URL_LOGIN = "http://172.28.1.35/sewa_barang/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mContext=this;
-        startInit();
-    }
 
-    @Override
-    public void startInit() {
-        if (Prefs.getInt(SPref.getGroupUser(),0)==1){
-            move.moveActivity(mContext,UserMain.class);
-            finish();
-        }
-        if (Prefs.getInt(SPref.getGroupUser(),0)==2){
-            move.moveActivity(mContext,UserMain.class);
-            finish();
-        }
-        initToolbar();
-        initUI();
-        initValue();
-        initEvent();
-    }
+        loading = findViewById(R.id.loading);
+        username = findViewById(R.id.et_layoutusername);
+        password = findViewById(R.id.et_layoutpassword);
+        btn_login = findViewById(R.id.buttonlogin);
+        btn_register = findViewById(R.id.btn_register);
 
-    @Override
-    public void initToolbar() {
-        getSupportActionBar().hide();
-    }
-
-    @Override
-    public void initUI() {
-        et_username=(MyEditText)findViewById(R.id.et_username);
-        et_password=(MyEditText)findViewById(R.id.et_password);
-        btn_login=(MyTextView)findViewById(R.id.btn_login);
-        txt_register=(MyTextView) findViewById(R.id.txt_register);
-        logofont=(TextView)findViewById(R.id.logofont);
-        Typeface custom_fonts = Typeface.createFromAsset(getAssets(), "fonts/ArgonPERSONAL-Regular.otf");
-        logofont.setTypeface(custom_fonts);
-    }
-
-    @Override
-    public void initValue() {
-
-    }
-
-    @Override
-    public void initEvent() {
-        btn_login.setOnClickListener(this);
-        txt_register.setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-
-            case R.id.btn_login:
-                if (validate_login())
-                    login();
-                break;
-
-            case R.id.txt_register:
-                move.moveActivity(mContext,ActivityRegister.class);
-                break;
-        }
-    }
-
-    public boolean validate_login(){
-        return (!validate.cek(et_username)&&!validate.cek(et_password)) ? true : false;
-    }
-
-    public void login(){
-        pDialog = new ProgressDialog(this);
-        //  pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setMessage("Loading");
-        pDialog.setCancelable(false);
-        // pDialog.setIndeterminate(false);
-        pDialog.show();
-
-        Call<ResponseLogin> user=client.getApi().auth(et_username.getText().toString(),et_password.getText().toString());
-        user.enqueue(new Callback<ResponseLogin>() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                pDialog.hide();
-                if (response.isSuccessful()){
-                    if (response.body().getStatus()){
-                        userData=response.body().getData();
-                        Toasty.success(mContext,"login berhasil", Toast.LENGTH_LONG).show();
-                        Log.d("data user",userData.toString());
-                        setPreference(userData);
-                        if (userData.getGroup_user().equals(1))
-                            move.moveActivity(mContext,SplashActivity.class);
-                        else
-                            move.moveActivity(mContext,SplashActivity.class);
-                        finish();
-                    }else{
-                        Toasty.error(mContext,"Username dan password salah",Toast.LENGTH_LONG).show();
-                    }
-                }else{
-                    Toasty.error(mContext,"Username dan password salah",Toast.LENGTH_LONG).show();
+            public void onClick(View view) {
+                String mUsername = username.getText().toString().trim();
+                String mPass = password.getText().toString().trim();
+
+                if (!mUsername.isEmpty() || !mPass.isEmpty()){
+                    Login(mUsername, mPass);
+                } else {
+                    username.setError("Please insert Username");
+                    password.setError("Please insert password");
                 }
             }
-
-            @Override
-            public void onFailure(Call<ResponseLogin> call, Throwable t) {
-                pDialog.hide();
-//                new ProgressDialog(mContext)
-//                        .setTitle("Oops...")
-//                        .d("Koneksi bermasalah!")
-//                        .show();
-//                pDialog = new ProgressDialog(ActivityLogin.this);
-//                //  pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-//                pDialog.setMessage("Tidak ada koneksi");
-//                pDialog.show();
-                Toasty.success(mContext,"Koneksi Tidak ada",Toast.LENGTH_LONG).show();
-
-                if (pDialog.isShowing())
-                    pDialog.dismiss();
-            }
         });
-    }
+            btn_register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                }
+            });
+     }
+     private void Login(final String username, final String password){
+        loading.setVisibility(View.VISIBLE);
+        btn_login.setVisibility(View.GONE);
 
-    private void setPreference(DataUser du){
-        Prefs.putInt(SPref.getIdUser(),du.getId_user());
-        Prefs.putString(SPref.getUSERNAME(),du.getUsername());
-        Prefs.putString(SPref.getNAME(),du.getName());
-        Prefs.putString(SPref.getEMAIL(),du.getEmail());
-        Prefs.putString(SPref.getNoTelp(),du.getNo_telp());
-        Prefs.putString(SPref.getJenisKelamin(),du.getJenis_kelamin().toString());
-        Prefs.putString(SPref.getPHOTO(),du.getPhoto());
-        Prefs.putString(SPref.getLastUpdate(),du.getLast_update().toString());
-        Prefs.putString(SPref.getALAMAT(),du.getAlamat());
-        Prefs.putInt(SPref.getGroupUser(),du.getGroup_user());
-        Prefs.putString(SPref.getPASSWORD(),du.getPassword().toString());
-    }
+         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LOGIN, new Response.Listener<String>() {
+             @Override
+             public void onResponse(String response) {
+                 try {
+                     JSONObject jsonObject = new JSONObject(response);
+                     String success = jsonObject.getString("success");
+                     JSONArray jsonArray = jsonObject.getJSONArray("login");
+
+                     if(success.equals("1")){
+                         for(int i = 0; i < jsonArray.length();i++){
+                             JSONObject object = jsonArray.getJSONObject(i);
+                             String nama = object.getString("nama").trim();
+                             String username = object.getString("username").trim();
+                             Toast.makeText(LoginActivity.this, "Success Login. \nYour Name : "+nama+"\nYour Username :"+username, Toast.LENGTH_SHORT).show();
+                            loading.setVisibility(View.GONE);
+                         }
+                     }
+                 }catch (JSONException e){
+                     e.printStackTrace();
+                     loading.setVisibility(View.GONE);
+                     btn_login.setVisibility(View.VISIBLE);
+                     Toast.makeText(LoginActivity.this, "Error" +e.toString(), Toast.LENGTH_SHORT).show();
+                 }
+
+             }
+         },
+                 new Response.ErrorListener() {
+                     @Override
+                     public void onErrorResponse(VolleyError error) {
+                         loading.setVisibility(View.GONE);
+                         btn_login.setVisibility(View.VISIBLE);
+                         Toast.makeText(LoginActivity.this, "Error" +error.toString(), Toast.LENGTH_SHORT).show();
+                     }
+                 })
+         {
+             @Override
+             protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("password", password);
+
+                 return params;
+             }
+         };
+         RequestQueue requestQueue = Volley.newRequestQueue(this);
+         requestQueue.add(stringRequest);
+     }
+
 }
