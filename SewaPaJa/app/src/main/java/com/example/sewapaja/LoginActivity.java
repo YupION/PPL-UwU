@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.commit();
 
                         // Memanggil main activity
-                        Intent intent = new Intent(LoginActivity.this, ListBarang.class);
+                        Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                         intent.putExtra(TAG_ID, id);
                         intent.putExtra(TAG_USERNAME, username);
                         finish();

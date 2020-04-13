@@ -1,10 +1,13 @@
 package com.example.sewapaja;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,46 +27,98 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ListActivity extends AppCompatActivity {
-    Button btn_logout;
-    TextView txt_id, txt_username;
-    String id, username;
-    SharedPreferences sharedpreferences;
+    private RecyclerView recyclerView;
+    ArrayList<JSonDataList> arrayList;
 
-    public static final String TAG_ID = "id";
-    public static final String TAG_USERNAME = "username";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        btn_logout = (Button) findViewById(R.id.btn_logout);
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        sharedpreferences = getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
+        arrayList = new ArrayList<JSonDataList>();
+        JsonFetch jsonFetch = new JsonFetch();
+        jsonFetch.execute();
 
-        id = getIntent().getStringExtra(TAG_ID);
-        username = getIntent().getStringExtra(TAG_USERNAME);
+    }
 
-        btn_logout.setOnClickListener(new View.OnClickListener() {
+    public class JsonFetch extends AsyncTask<String,String,String>{
+        HttpURLConnection httpURLConnection = null;
+        String mainfile;
+        @Override
+        protected String doInBackground(String... strings) {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                // update login session ke FALSE dan mengosongkan nilai id dan username
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putBoolean(LoginActivity.session_status, false);
-                editor.putString(TAG_ID, null);
-                editor.putString(TAG_USERNAME, null);
-                editor.commit();
+            try {
+                URL url = new URL("https://api.npoint.io/845029947032491b8f0f");
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.connect();
 
-                Intent intent = new Intent(ListActivity.this, LoginActivity.class);
-                finish();
-                startActivity(intent);
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuffer stringBuffer = new StringBuffer();
+                String line = "";
+                while ((line = bufferedReader.readLine())!=null){
+
+                    stringBuffer.append(line);
+
+
+                }
+
+                    mainfile = stringBuffer.toString();
+
+                    JSONArray parent = new JSONArray(mainfile);
+                    int i =0;
+                    while (i<=parent.length()){
+
+
+                        JSONObject child = parent.getJSONObject(i);
+                        String id = child.getString("id_barang");
+                        String img = child.getString("image");
+                        String merk = child.getString("merk");
+                        String jenis = child.getString("jenis");
+                        String harga = child.getString("harga");
+                        String warna = child.getString("warna");
+
+                        arrayList.add(new JSonDataList(id,merk,jenis,warna,harga,img));
+                        i++;
+                    }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
 
 
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+
+            JsonAdapter jsonAdapter = new JsonAdapter(arrayList,getApplicationContext());
+            recyclerView.setAdapter(jsonAdapter);
+
+
+
+        }
     }
 }

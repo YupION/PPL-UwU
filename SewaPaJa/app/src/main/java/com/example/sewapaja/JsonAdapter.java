@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class JsonAdapter extends RecyclerView.Adapter<JsonDataViewHolder> {
+public class JsonAdapter extends RecyclerView.Adapter<JsonDataViewHolder>{
 
     ArrayList<JSonDataList> list;
     Context context;
@@ -27,26 +28,27 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonDataViewHolder> {
 
     @NonNull
     @Override
-    public JsonDataViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public JsonDataViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.row_barang,viewGroup,false);
+
+       View view = LayoutInflater.from(context).inflate(R.layout.row_barang,parent,false);
+
+
 
         return new JsonDataViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull JsonDataViewHolder jsonDataViewHolder, int i) {
-
-    JSonDataList currentData = list.get(i);
-
-    jsonDataViewHolder.warna.setText(currentData.getWarna());
-    jsonDataViewHolder.harga.setText(currentData.getHarga());
-    jsonDataViewHolder.jenis.setText(currentData.getJenis());
-    Picasso.get().load(currentData.getImage()).into(jsonDataViewHolder.imageView);
+    public void onBindViewHolder(@NonNull JsonDataViewHolder holder, int position) {
 
 
-
-
+        JSonDataList currentData = list.get(position);
+        holder.id.setText(currentData.getId());
+        holder.merk.setText(currentData.getMerk());
+        holder.jenis.setText(currentData.getJenis());
+        holder.warna.setText(currentData.getWarna());
+        holder.harga.setText(currentData.getHarga());
+        Picasso.get().load(currentData.getImage()).into(holder.imageView);
     }
 
     @Override
