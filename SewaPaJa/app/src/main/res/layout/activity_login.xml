@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_height="299dp"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fadingEdge="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/sewapaja" />
+
+        <EditText
+            android:id="@+id/et_layoutusername"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/roundwhite"
+            android:drawableLeft="@drawable/ic_action_person"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:textColor="@color/nliveo_black"
+            android:textColorHint="@color/nliveo_black" />
+
+        <EditText
+            android:id="@+id/et_layoutpassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="23dp"
+            android:background="@drawable/roundwhite"
+            android:drawableLeft="@drawable/ic_action_accounts"
+            android:hint="Password"
+            android:password="true"
+            android:singleLine="true"
+            android:textColor="@color/nliveo_black"
+            android:textColorHint="@color/nliveo_black"
+            android:layout_marginLeft="1dp" />
+
+        <Button
+            android:id="@+id/buttonlogin"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/round"
+            android:text="LOGIN"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginBottom="34dp"
+            android:background="@drawable/round"
+            android:text="Create Account"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+    </LinearLayout>
+
+</RelativeLayout>
