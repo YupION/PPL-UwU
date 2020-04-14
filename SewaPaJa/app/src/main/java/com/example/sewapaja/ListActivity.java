@@ -74,8 +74,6 @@ public class ListActivity extends AppCompatActivity {
                 while ((line = bufferedReader.readLine())!=null){
 
                     stringBuffer.append(line);
-
-
                 }
 
                     mainfile = stringBuffer.toString();
