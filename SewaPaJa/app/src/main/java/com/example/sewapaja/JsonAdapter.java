@@ -1,6 +1,7 @@
 package com.example.sewapaja;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,14 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonDataViewHolder>{
     ArrayList<JSonDataList> list;
     Context context;
 
+    MyClick myClick;
+
+
     public JsonAdapter() {
     }
 
-    public JsonAdapter(ArrayList<JSonDataList> list, Context context) {
+    public JsonAdapter(ArrayList<JSonDataList> list, Context context,MyClick myClick) {
+        this.myClick = myClick;
         this.list = list;
         this.context = context;
     }
@@ -32,23 +37,34 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonDataViewHolder>{
 
 
        View view = LayoutInflater.from(context).inflate(R.layout.row_barang,parent,false);
+        final JsonDataViewHolder jsonDataViewHolder = new JsonDataViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                myClick.onClickMe(view,jsonDataViewHolder.getPosition());
+
+            }
+        });
 
 
-
-        return new JsonDataViewHolder(view);
+        return jsonDataViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull JsonDataViewHolder holder, int position) {
 
 
-        JSonDataList currentData = list.get(position);
+        final JSonDataList currentData = list.get(position);
         holder.id.setText(currentData.getId());
         holder.merk.setText(currentData.getMerk());
         holder.jenis.setText(currentData.getJenis());
         holder.warna.setText(currentData.getWarna());
         holder.harga.setText(currentData.getHarga());
         Picasso.get().load(currentData.getImage()).into(holder.imageView);
+
+
+
     }
 
     @Override

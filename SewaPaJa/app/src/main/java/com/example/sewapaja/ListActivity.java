@@ -11,17 +11,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -112,7 +101,27 @@ public class ListActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
 
-            JsonAdapter jsonAdapter = new JsonAdapter(arrayList,getApplicationContext());
+            JsonAdapter jsonAdapter = new JsonAdapter(arrayList, getApplicationContext(), new MyClick() {
+                @Override
+                public void onClickMe(View view, int Position) {
+
+                    String link_img = arrayList.get(Position).getImage();
+                    String link_harga = arrayList.get(Position).getHarga();
+                    String link_warna = arrayList.get(Position).getWarna();
+                    String link_jenis = arrayList.get(Position).getJenis();
+                    String link_id = arrayList.get(Position).getId();
+                    String link_merk = arrayList.get(Position).getMerk();
+                    Intent i = new Intent(ListActivity.this,DetailActivity.class);
+                    i.putExtra("img",link_img);
+                    i.putExtra("harga",link_harga);
+                    i.putExtra("warna",link_warna);
+                    i.putExtra("jenis",link_jenis);
+                    i.putExtra("id",link_id);
+                    i.putExtra("merk",link_merk);
+                    startActivity(i);
+
+                }
+            });
             recyclerView.setAdapter(jsonAdapter);
 
 
