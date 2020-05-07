@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SewaActivity"
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/nliveo_blue_colorPrimary"
+        android:layout_margin="5dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Form Penyewaan"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:id="@+id/form_sewa"
+
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/form_sewa"
+            android:text="Nama Penyewa"
+            android:textColor="@color/nliveo_black"
+            android:id="@+id/txt_namasewa"
+            android:textSize="20dp"
+
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_namasewa"
+            android:textColor="@color/nliveo_black"
+            android:id="@+id/et_namasewa"
+            android:hint="Masukan Nama Lengkap"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_namasewa"
+            android:textColor="@color/nliveo_black"
+            android:text="Alamat"
+            android:id="@+id/txt_alamatsewa"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukan Alamat Lengkap"
+            android:id="@+id/et_alamatsewa"
+            android:layout_below="@+id/txt_alamatsewa"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_notelp"
+            android:text="No Telp"
+            android:textColor="@color/nliveo_black"
+            android:layout_below="@id/et_alamatsewa"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukan Nomer Telp "
+            android:id="@+id/et_notelp"
+            android:layout_below="@+id/txt_notelp"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_emailsewa"
+            android:text="Email"
+            android:textColor="@color/nliveo_black"
+            android:layout_below="@+id/et_notelp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukan Alamat Email"
+            android:layout_below="@+id/txt_emailsewa"
+            android:id="@+id/et_emailsewa"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/submit"
+            android:layout_below="@id/et_emailsewa"
+            android:text="Submit"
+            android:gravity="center"
+            />
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

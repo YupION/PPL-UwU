@@ -70,7 +70,6 @@
             android:text="Create Account"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
-
     </LinearLayout>
 
 </RelativeLayout>
