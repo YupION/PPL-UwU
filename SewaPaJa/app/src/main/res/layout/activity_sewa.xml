@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".SewaActivity"
     android:background="@color/white">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,13 +22,19 @@
             android:textSize="30dp"
             android:textStyle="bold"
             android:id="@+id/form_sewa"
-
             android:textAlignment="center"
-            />
+            android:gravity="center_horizontal" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/row_image2"
+            android:layout_below="@+id/form_sewa"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/form_sewa"
+            android:layout_below="@+id/row_image2"
             android:text="Nama Penyewa"
             android:textColor="@color/nliveo_black"
             android:id="@+id/txt_namasewa"
@@ -89,18 +99,56 @@
             android:layout_below="@+id/txt_emailsewa"
             android:id="@+id/et_emailsewa"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/nliveo_black"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_barangsewa"
+            android:layout_below="@+id/et_emailsewa"
+            android:text="Nama Barang"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtbarangsewa"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:text="Barang yang di sewa"
+            android:layout_below="@+id/txt_barangsewa"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_bayarsewa"
+            android:textSize="20dp"
+            android:text="Biaya"
+            android:textColor="@color/nliveo_black"
+            android:textStyle="bold"
+            android:layout_below="@+id/txtbarangsewa"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:text="Rp 500.000"
+            android:id="@+id/txtbiaya"
+            android:layout_below="@+id/txt_bayarsewa"
+            />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/submit"
-            android:layout_below="@id/et_emailsewa"
+            android:layout_below="@+id/txtbiaya"
             android:text="Submit"
             android:gravity="center"
+            android:layout_centerHorizontal="true"
             />
     </RelativeLayout>
 
 
 
-
+    </ScrollView>
 </LinearLayout>

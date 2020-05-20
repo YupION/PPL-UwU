@@ -23,8 +23,7 @@ import java.util.Calendar;
 public class DetailActivity extends AppCompatActivity {
     private static final String TAG = "DetailActivity";
     Button btn_sewa;
-    private TextView mDisplayDatePinjam,mDisplayDateKembali;
-    private DatePickerDialog.OnDateSetListener mDateSetListener,mDateSetlistenerKembali;
+    String nama_barang,biaya,gambar;
     private ImageView imageView;
     private TextView harga,jenis,warna,merk,id;
     @Override
@@ -39,12 +38,12 @@ public class DetailActivity extends AppCompatActivity {
         merk = findViewById(R.id.detil_merk);
         id = findViewById(R.id.detil_id);
 
-        String link = getIntent().getStringExtra("img");
+        final String link = getIntent().getStringExtra("img");
         String link_harga = getIntent().getStringExtra("harga");
         String link_warna = getIntent().getStringExtra("warna");
         String link_jenis = getIntent().getStringExtra("jenis");
         String link_merk = getIntent().getStringExtra("merk");
-        String link_id = getIntent().getStringExtra("id");
+        final String link_id = getIntent().getStringExtra("id");
 
         harga.setText(link_harga);
         jenis.setText(link_jenis);
@@ -53,62 +52,18 @@ public class DetailActivity extends AppCompatActivity {
         id.setText(link_id);
         Picasso.get().load(link).into(imageView);
 
-        mDisplayDatePinjam = findViewById(R.id.tgl_pinjam);
-        mDisplayDateKembali = findViewById(R.id.tgl_kembali);
-
-        mDisplayDateKembali.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal2 = Calendar.getInstance();
-                int year2 = cal2.get(Calendar.YEAR);
-                int month2 = cal2.get(Calendar.MONTH);
-                int day2 = cal2.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(DetailActivity.this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,mDateSetlistenerKembali,year2,month2,day2);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-        mDisplayDatePinjam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(DetailActivity.this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,mDateSetListener,year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month +1;
-
-                Log.d(TAG, "onDataSet: mm/dd/yy : " + month + "/" + day + "/" +year);
-                String date = month +"/" + day + "/" + year;
-                mDisplayDatePinjam.setText(date);
-
-            }
-        };
-        mDateSetlistenerKembali = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year2, int month2, int day2) {
-                month2 = month2 +1;
-                Log.d(TAG, "onDataSet: mm/dd/yy : " + month2 + "/" + day2 + "/" +year2);
-                String date2 = month2 +"/" + day2 + "/" + year2;
-                mDisplayDateKembali.setText(date2);
-            }
-        };
-
         btn_sewa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nama_barang=merk.getText().toString();
+                biaya=harga.getText().toString();
+                gambar=link;
                 Intent intent = new Intent(DetailActivity.this , SewaActivity.class);
-                finish();
+                intent.putExtra("NamaBarang",nama_barang);
+                intent.putExtra("BIAYA",biaya);
+                intent.putExtra("GAMBAR",gambar);
                 startActivity(intent);
+
 
             }
         });
