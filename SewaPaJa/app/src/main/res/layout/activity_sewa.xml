@@ -42,7 +42,7 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/nliveo_black"
             android:id="@+id/txt_namasewa"
-            android:textSize="20dp"
+            android:textSize="15dp"
 
             android:textStyle="bold"/>
         <EditText
@@ -61,7 +61,7 @@
             android:text="Alamat"
             android:id="@+id/txt_alamatsewa"
             android:textStyle="bold"
-            android:textSize="20dp"/>
+            android:textSize="15dp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
             android:text="No Telp"
             android:textColor="@color/nliveo_black"
             android:layout_below="@id/et_alamatsewa"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textStyle="bold"
             />
         <EditText
@@ -96,7 +96,7 @@
             android:textColor="@color/nliveo_black"
             android:layout_below="@+id/et_notelp"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="15dp"
             />
         <EditText
             android:layout_width="match_parent"
@@ -110,7 +110,7 @@
             android:layout_width="wrap_content"
             android:textStyle="bold"
             android:textColor="@color/nliveo_black"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_height="wrap_content"
             android:id="@+id/txt_barangsewa"
             android:layout_below="@+id/et_emailsewa"
@@ -119,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtbarangsewa"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textStyle="bold"
             android:textColor="@color/nliveo_black"
             android:text="Barang yang di sewa"
@@ -129,7 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txt_bayarsewa"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:text="Biaya"
             android:textColor="@color/nliveo_black"
             android:textStyle="bold"
@@ -139,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:text="Rp 500.000"
             android:textColor="@color/nliveo_black"
             android:id="@+id/txtbiaya"

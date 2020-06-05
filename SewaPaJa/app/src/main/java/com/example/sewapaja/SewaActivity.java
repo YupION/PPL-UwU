@@ -3,6 +3,7 @@ package com.example.sewapaja;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class SewaActivity extends AppCompatActivity {
     EditText editnama, editalamat, edittelp, editemail;
     ProgressDialog pDialog;
     TextView txtnamabarang, txthargabarang;
+    String id_user,username;
     Button submit;
     private ImageView image;
     SharedPreferences sharedpreferences;
@@ -49,6 +51,9 @@ public class SewaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sewa);
+        sharedpreferences = getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
+        id_user = getIntent().getStringExtra(TAG_ID);
+        username = sharedpreferences.getString(TAG_USERNAME, null);
         editnama = findViewById(R.id.et_namasewa);
         editalamat = findViewById(R.id.et_alamatsewa);
         editemail = findViewById(R.id.et_emailsewa);
@@ -65,11 +70,12 @@ public class SewaActivity extends AppCompatActivity {
         gambar = intent.getStringExtra("GAMBAR");
         Nama_barang = intent.getStringExtra("NamaBarang");
         biaya = intent.getStringExtra("BIAYA");
-
+        //iduser = intent.getStringExtra("iduser");
 
         txthargabarang.setText(biaya);
         txtnamabarang.setText(Nama_barang);
         Picasso.get().load(gambar).into(image);
+
 
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -81,14 +87,14 @@ public class SewaActivity extends AppCompatActivity {
                 String telp = edittelp.getText().toString();
                 String bayar = txthargabarang.getText().toString();
                 String namabarang = txtnamabarang.getText().toString();
-                checkdata(namasewa, alamat, email, telp, bayar, namabarang,gambar);
+                checkdata(namasewa, alamat, email, telp, bayar, namabarang,gambar,username);
             }
         });
 
 
     }
 
-    private void checkdata(final String namasewa, final String alamat, final String email, final String telp, final String bayar, final String namabarang, final String gambar) {
+    private void checkdata(final String namasewa, final String alamat, final String email, final String telp, final String bayar, final String namabarang, final String gambar,final String username) {
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Process ...");
         pDialog.setCancelable(false);
@@ -144,6 +150,7 @@ public class SewaActivity extends AppCompatActivity {
                 params.put("bayar", bayar);
                 params.put("namabarang", namabarang);
                 params.put("gambar",gambar);
+                params.put("username",username);
                 return params;
             }
         };
