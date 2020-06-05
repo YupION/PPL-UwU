@@ -1,7 +1,7 @@
 package com.example.sewapaja;
 
 public class JSonDataList {
-    String merk,jenis,warna,harga,image,id;
+    String merk,jenis,warna,harga,image,id,desk;
 
     public String getMerk() {
         return merk;
@@ -27,15 +27,18 @@ public class JSonDataList {
         return id;
     }
 
+    public String getDesk() { return desk;}
+
     public JSonDataList() {
     }
 
-    public JSonDataList(String id, String merk, String jenis, String warna, String harga, String image) {
+    public JSonDataList(String id, String merk, String jenis, String warna, String harga, String image, String desk) {
         this.merk = merk;
         this.jenis = jenis;
         this.warna = warna;
         this.harga = harga;
         this.image = image;
         this.id = id;
+        this.desk = desk;
     }
 }

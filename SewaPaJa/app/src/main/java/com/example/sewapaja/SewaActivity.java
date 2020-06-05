@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,12 +27,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NavigableMap;
 
+import static com.example.sewapaja.LoginActivity.TAG_ID;
+import static com.example.sewapaja.LoginActivity.TAG_USERNAME;
+
 public class SewaActivity extends AppCompatActivity {
     EditText editnama, editalamat, edittelp, editemail;
     ProgressDialog pDialog;
     TextView txtnamabarang, txthargabarang;
     Button submit;
     private ImageView image;
+    SharedPreferences sharedpreferences;
     Intent intent;
     private String url = Server.URL + "transaksi.php";
     String tag_json_obj = "json_obj_req";
@@ -54,7 +59,8 @@ public class SewaActivity extends AppCompatActivity {
         submit = findViewById(R.id.submit);
 
         Intent intent = getIntent();
-        String Nama_barang, biaya, gambar;
+        final String Nama_barang, biaya, gambar;
+
 
         gambar = intent.getStringExtra("GAMBAR");
         Nama_barang = intent.getStringExtra("NamaBarang");
@@ -65,6 +71,7 @@ public class SewaActivity extends AppCompatActivity {
         txtnamabarang.setText(Nama_barang);
         Picasso.get().load(gambar).into(image);
 
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,14 +81,14 @@ public class SewaActivity extends AppCompatActivity {
                 String telp = edittelp.getText().toString();
                 String bayar = txthargabarang.getText().toString();
                 String namabarang = txtnamabarang.getText().toString();
-                checkdata(namasewa, alamat, email, telp, bayar, namabarang);
+                checkdata(namasewa, alamat, email, telp, bayar, namabarang,gambar);
             }
         });
 
 
     }
 
-    private void checkdata(final String namasewa, final String alamat, final String email, final String telp, final String bayar, final String namabarang) {
+    private void checkdata(final String namasewa, final String alamat, final String email, final String telp, final String bayar, final String namabarang, final String gambar) {
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Process ...");
         pDialog.setCancelable(false);
@@ -136,6 +143,7 @@ public class SewaActivity extends AppCompatActivity {
                 params.put("telp", telp);
                 params.put("bayar", bayar);
                 params.put("namabarang", namabarang);
+                params.put("gambar",gambar);
                 return params;
             }
         };

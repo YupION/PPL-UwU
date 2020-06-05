@@ -8,6 +8,10 @@
     app:cardElevation="10dp"
     android:layout_margin="5dp"
     tools:context=".DetailActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
     <LinearLayout
         android:padding="10dp"
         android:background="@color/white"
@@ -26,9 +30,8 @@
             android:id="@+id/detil_merk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:text="Merk"
-            android:textAlignment="center"
+            android:textColor="@color/nliveo_black"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -76,77 +79,42 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/detil_harga"
             android:textColor="@color/nliveo_black"
-            android:layout_marginLeft="66dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="3dp"
             android:layout_toRightOf="@+id/txt_warna"
             android:text="Black"
             android:id="@+id/detil_warna"
             android:textSize="14sp"
             android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt_id"
-            android:text="Id Barang "
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/nliveo_black"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="60dp"
-            android:layout_toRightOf="@+id/detil_harga"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/nliveo_black"
-            android:id="@+id/detil_id"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:layout_marginLeft="50dp"
-            android:text="1"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/txt_id"
-            />
-
-        <TextView
-            android:id="@+id/text_jenis"
-            android:layout_width="wrap_content"
-            android:textColor="@color/nliveo_black"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/detil_id"
-            android:layout_marginLeft="47dp"
-            android:layout_marginTop="2dp"
-            android:layout_toRightOf="@id/detil_warna"
-            android:text="Jenis Barang"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/nliveo_black"
-            android:id="@+id/detil_jenis"
-            android:text="Camera"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/text_jenis"
-            android:layout_below="@+id/detil_id"
-            />
-    </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/nliveo_black"
+                android:text="Deskripsi Produk"
+                android:id="@+id/txtdeskiprsi"
+                android:layout_below="@+id/detil_warna"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtdeskiprsi"
+                android:text="Deskripsi Produk"
+                android:textColor="@color/nliveo_black"
+                android:id="@+id/deskbarang"/>
             <Button
-                android:layout_width="70dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="Sewa"
                 android:id="@+id/sewa"
-                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/deskbarang"
+                android:layout_alignParentBottom="true"
                 />
-        </RelativeLayout>
+
+
+    </RelativeLayout>
 
 
     </LinearLayout>
 
+    </ScrollView>
 </androidx.cardview.widget.CardView>

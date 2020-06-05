@@ -7,11 +7,24 @@
     tools:context=".ListActivity"
     android:orientation="horizontal">
 
-   <androidx.recyclerview.widget.RecyclerView
+
+   <FrameLayout
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/recyclerview"
+       android:layout_height="match_parent">
+      <androidx.recyclerview.widget.RecyclerView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/recyclerview"
+          />
+       <com.google.android.material.bottomnavigation.BottomNavigationView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" android:id="@+id/menu_bawah"
+       android:layout_gravity="bottom"
+       android:foregroundGravity="bottom"
+       app:menu="@menu/drawer_menu"
        />
+
+   </FrameLayout>
 
     
 </LinearLayout>

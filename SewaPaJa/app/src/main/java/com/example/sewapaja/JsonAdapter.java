@@ -62,6 +62,7 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonDataViewHolder>{
         holder.warna.setText(currentData.getWarna());
         holder.harga.setText(currentData.getHarga());
         Picasso.get().load(currentData.getImage()).into(holder.imageView);
+        holder.desk.setText(currentData.getDesk());
 
 
 

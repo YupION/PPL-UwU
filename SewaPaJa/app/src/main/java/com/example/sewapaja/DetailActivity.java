@@ -25,7 +25,7 @@ public class DetailActivity extends AppCompatActivity {
     Button btn_sewa;
     String nama_barang,biaya,gambar;
     private ImageView imageView;
-    private TextView harga,jenis,warna,merk,id;
+    private TextView harga,jenis,warna,merk,id,deskbarang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,24 +33,27 @@ public class DetailActivity extends AppCompatActivity {
         btn_sewa = findViewById(R.id.sewa);
         imageView = findViewById(R.id.detail_pic);
         harga = findViewById(R.id.detil_harga);
-        jenis = findViewById(R.id.detil_jenis);
+        //jenis = findViewById(R.id.detil_jenis);
         warna = findViewById(R.id.detil_warna);
         merk = findViewById(R.id.detil_merk);
-        id = findViewById(R.id.detil_id);
+       // id = findViewById(R.id.detil_id);
+        deskbarang = findViewById(R.id.deskbarang);
 
         final String link = getIntent().getStringExtra("img");
         String link_harga = getIntent().getStringExtra("harga");
         String link_warna = getIntent().getStringExtra("warna");
-        String link_jenis = getIntent().getStringExtra("jenis");
+       // String link_jenis = getIntent().getStringExtra("jenis");
         String link_merk = getIntent().getStringExtra("merk");
-        final String link_id = getIntent().getStringExtra("id");
+        //final String link_id = getIntent().getStringExtra("id");
+        String link_desk = getIntent().getStringExtra("desk");
 
         harga.setText(link_harga);
-        jenis.setText(link_jenis);
+        //jenis.setText(link_jenis);
         warna.setText(link_warna);
         merk.setText(link_merk);
-        id.setText(link_id);
+        //id.setText(link_id);
         Picasso.get().load(link).into(imageView);
+        deskbarang.setText(link_desk);
 
         btn_sewa.setOnClickListener(new View.OnClickListener() {
             @Override

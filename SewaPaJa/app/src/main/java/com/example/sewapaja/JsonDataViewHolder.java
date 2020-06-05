@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class JsonDataViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView;
-    TextView id,harga,warna,jenis,merk;
+    TextView id,harga,warna,jenis,merk,desk;
 
     public JsonDataViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -19,6 +19,7 @@ public class JsonDataViewHolder extends RecyclerView.ViewHolder {
         warna = itemView.findViewById(R.id.row_warna);
         jenis = itemView.findViewById(R.id.row_jenis);
         merk = itemView.findViewById(R.id.row_name);
+        desk = itemView.findViewById(R.id.deskripsi);
 
 
     }
