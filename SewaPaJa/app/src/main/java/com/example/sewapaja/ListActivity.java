@@ -76,7 +76,7 @@ public class ListActivity extends AppCompatActivity implements BottomNavigationV
                 startActivity(login);
                 break;
             case R.id.Transaksi:
-                Intent transaksi = new Intent(ListActivity.this, SewaActivity.class);
+                Intent transaksi = new Intent(ListActivity.this, TransaksiActivity.class);
                 startActivity(transaksi);
                 break;
             case R.id.home:

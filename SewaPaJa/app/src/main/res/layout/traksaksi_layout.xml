@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="10dp"
+    android:layout_margin="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:id="@+id/thumbnailbarang"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_launcher"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/namabarangsewa"
+                android:text="Contoh Barang"
+                android:layout_marginLeft="10sp"
+                android:textSize="20sp"
+                android:layout_toRightOf="@+id/thumbnailbarang"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/namabarangsewa"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/thumbnailbarang"
+                android:layout_marginLeft="10sp"
+                android:id="@+id/txtrp"
+                android:text="Rp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/txtrp"
+                android:id="@+id/biayasewa"
+                android:layout_marginTop="5dp"
+                android:text="1800000"
+                android:layout_below="@+id/namabarangsewa"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtrp"
+                android:id="@+id/usernamepenyewa"
+                android:layout_toRightOf="@+id/thumbnailbarang"
+                android:text="Alvin Kurniawan"
+                android:layout_marginLeft="10sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/usernamepenyewa"
+                android:layout_toRightOf="@+id/thumbnailbarang"
+                android:layout_marginLeft="10sp"
+                android:text="Pringgading Utara "
+                android:id="@+id/alamatpenyewa"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12/12/12 12:20"
+                android:layout_below="@+id/alamatpenyewa"
+                android:layout_toRightOf="@id/thumbnailbarang"
+                android:layout_marginLeft="10sp"
+                android:id="@+id/tanggaltransaksi"
+                />
+
+        </RelativeLayout>
+        
+    </LinearLayout>
+    
+
+</androidx.cardview.widget.CardView>
