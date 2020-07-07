@@ -87,7 +87,7 @@ public class Requesthandlerr {
         return sb.toString();
     }
 
-    public String sendGetRequestParam(String requestURL, String username){
+    public String sendGetRequestParam(URL requestURL, String username){
         StringBuilder sb =new StringBuilder();
         try {
             URL url = new URL(requestURL+username);

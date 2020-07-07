@@ -41,13 +41,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.sewapaja.LoginActivity.TAG_USERNAME;
+
 public class ListActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private RecyclerView recyclerView;
     ArrayList<JSonDataList> arrayList;
     SharedPreferences sharedpreferences;
-
+    //public final static String TAG_USERNAME = "username";
+    public final static String TAG_ID = "id";
+    String username,id;
     public static final String my_shared_preferences = "my_shared_preferences";
-    Boolean session = true;
+    Boolean session = false;
     public static final String session_status = "session_status";
     private BottomNavigationView menu_bawah;
 
@@ -58,6 +62,8 @@ public class ListActivity extends AppCompatActivity implements BottomNavigationV
         sharedpreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
         session = sharedpreferences.getBoolean(session_status, true);
         recyclerView = findViewById(R.id.recyclerview);
+        id = sharedpreferences.getString(TAG_ID, null);
+        username = sharedpreferences.getString(TAG_USERNAME, null);
         menu_bawah=findViewById(R.id.menu_bawah);
         menu_bawah.setOnNavigationItemSelectedListener(this);
         recyclerView.setHasFixedSize(true);
@@ -71,10 +77,10 @@ public class ListActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.profile:
-                Intent login = new Intent(ListActivity.this, RegisterActivity.class);
-                startActivity(login);
-                break;
+            //case R.id.profile:
+               //Intent login = new Intent(ListActivity.this, RegisterActivity.class);
+                //startActivity(login);
+                //break;
             case R.id.Transaksi:
                 Intent transaksi = new Intent(ListActivity.this, TransaksiActivity.class);
                 startActivity(transaksi);
@@ -86,9 +92,11 @@ public class ListActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.logout:
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.putBoolean(session_status, false);
-                editor.commit();
+                editor.remove(username);
+                editor.remove(TAG_ID);
+                editor.clear().commit();
                 startActivity(new Intent(ListActivity.this,LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                finish();
+
         }
         return true;
     }
@@ -100,7 +108,7 @@ public class ListActivity extends AppCompatActivity implements BottomNavigationV
         protected String doInBackground(String... strings) {
 
             try {
-                URL url = new URL("https://api.npoint.io/2621e10485fe8c564062");
+                URL url = new URL("http://192.168.1.2/sewa_barang/api.php");
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.connect();
 
